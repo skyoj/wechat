@@ -3,6 +3,7 @@ import hashlib
 import web
 import receive
 import reply
+import kdniao
 
 class Handle(object):
     def GET(self):
@@ -36,7 +37,7 @@ class Handle(object):
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                content = "test"
+                content = kdniao.get_express(recMsg.Content)
                 replyMsg = reply.TextMsg(toUser,fromUser,content)
                 return replyMsg.send()
             else:
