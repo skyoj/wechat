@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import web
+import receive
+import reply
 
 class Handle(object):
     def GET(self):
@@ -26,3 +28,19 @@ class Handle(object):
                 return ""
         except Exception, Argument:
             return Argument
+    def POST(self):
+        try:
+            webData = web.data()
+            print "Handle Post webdata is", webData
+            recMsg = receive.parse_xml(webData)
+            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+                toUser = recMsg.FromUserName
+                fromUser = recMsg.ToUserName
+                content = "test"
+                replyMsg = reply.TextMsg(toUser,fromUser,content)
+                return replyMsg.send()
+            else:
+                print "暂不处理"
+                return "success"
+        except Exception, Argment:
+            return Argment
