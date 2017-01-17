@@ -90,10 +90,7 @@ def get_express(expresscode):
             item_no = 1
             Linedata = []
             for item in trace_data:
-                Linedata.append((str(item_no)+":", item['AcceptTime'], item['AcceptStation']))
+                Linedata.append((str(item_no) + ":" + item['AcceptTime'].encode("UTF-8") + item['AcceptStation'].encode("UTF-8")))
                 item_no += 1
             Msgdata = "目前状态： "+ str_state + "\n" + "\n".join(Linedata)
-            print "test start kd"
-            print Linedata
-            print Msgdata
             return Msgdata

@@ -38,8 +38,6 @@ class Handle(object):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
                 content = kdniao.get_express(recMsg.Content)
-                print 'test start'
-                print content
                 replyMsg = reply.TextMsg(toUser,fromUser,content)
                 return replyMsg.send()
             else:
