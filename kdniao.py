@@ -93,4 +93,7 @@ def get_express(expresscode):
                 Linedata.append((str(item_no)+":", item['AcceptTime'], item['AcceptStation']))
                 item_no += 1
             Msgdata = "目前状态： "+ str_state + "\n" + "\n".join(Linedata)
+            print "test start kd"
+            print Linedata
+            print Msgdata
             return Msgdata
