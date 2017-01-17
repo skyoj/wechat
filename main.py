@@ -2,7 +2,7 @@
 import web
 from handle import Handle
 urls = ('/wx', 'Handle',)
-class Handle(object):
+# class Handle(object):
 #    def GET(self):
 #        return "Hello this is a test"
 if __name__ == '__main__':
