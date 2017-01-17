@@ -9,8 +9,7 @@ def parse_xml(web_data):
     xmlData = ET.fromstring(web_data)
     msg_type = xmlData.find('MsgType').text
     if msg_type == 'text':
-        content = xmlData.find('Content').text.encode("utf-8")
-        return content
+        return TextMsg(xmlData)
     else:
         pass
 class Msg(object):
@@ -20,3 +19,7 @@ class Msg(object):
         self.CreateTime = xmlData.find('CreateTime').text
         self.MsgType = xmlData.find('MsgType').text
         self.MsgId = xmlData.find('MsgId').text
+class TextMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.Content = xmlData.find('Content').text.encode("utf-8")
