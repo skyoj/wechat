@@ -72,13 +72,13 @@ def get_express(expresscode):
     url = 'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx'
     data = get_company(expresscode, APP_id, APP_key, url)
     if not any(data['Shippers']):
-        print("未查到该快递信息,请检查快递单号是否有误！")
+        return "未查到该快递信息,请检查快递单号是否有误！"
     else:
         print("已查到该", data['Shippers'][0]['ShipperName']+"("+
               data['Shippers'][0]['ShipperCode']+")", expresscode)
         trace_data = get_traces(expresscode, data['Shippers'][0]['ShipperCode'], APP_id, APP_key, url)
         if trace_data['Success'] == "false" or not any(trace_data['Traces']):
-            print("未查询到该快递物流轨迹！")
+            return "未查询到该快递物流轨迹！"
         else:
             str_state = "问题件"
             if trace_data['State'] == '2':
@@ -88,8 +88,9 @@ def get_express(expresscode):
             print("目前状态： "+str_state)
             trace_data = trace_data['Traces']
             item_no = 1
+            Linedata = []
             for item in trace_data:
-                print(str(item_no)+":", item['AcceptTime'], item['AcceptStation'])
+                Linedata.append((str(item_no)+":", item['AcceptTime'], item['AcceptStation']))
                 item_no += 1
-            print("\n")
-    return trace_data
+            Msgdata = "目前状态： "+ str_state + "\n" + "\n".join(Linedata)
+            return Msgdata
