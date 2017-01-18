@@ -4,7 +4,7 @@ from handle import Handle
 urls = ('/wx', 'Handle',)
 # class Handle(object):
 #    def GET(self):
-#        return "Hello this is a test"
+#        return "KK V587"
 if __name__ == '__main__':
     app = web.application(urls, globals())
     app.run()
